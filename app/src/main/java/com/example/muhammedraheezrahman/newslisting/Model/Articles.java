@@ -2,14 +2,53 @@ package com.example.muhammedraheezrahman.newslisting.Model;
 
 public class Articles {
 
-    String author;
+    private String author;
 
-    String title;
+    private String title;
 
-    String description;
+    private String description;
 
-    String urlToImage;
+    private String urlToImage;
 
-    String content;
+    private String content;
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
