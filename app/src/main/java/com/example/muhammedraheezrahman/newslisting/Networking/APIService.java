@@ -11,5 +11,5 @@ import retrofit2.http.GET;
 public interface APIService {
 
     @GET("top-headlines?")
-    Call<List<News>> getNewsLsit(@Field("country")String country, @Field("apiKey") String apikey);
+    Call<News> getNewsLsit(@Field("country")String country, @Field("apiKey") String apikey);
 }
