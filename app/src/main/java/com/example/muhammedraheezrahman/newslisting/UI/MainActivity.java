@@ -1,7 +1,9 @@
-package com.example.muhammedraheezrahman.newslisting;
+package com.example.muhammedraheezrahman.newslisting.UI;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.muhammedraheezrahman.newslisting.R;
 
 public class MainActivity extends AppCompatActivity {
 
