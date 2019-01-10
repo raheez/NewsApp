@@ -11,8 +11,12 @@ import android.widget.ImageView;
 import com.example.muhammedraheezrahman.newslisting.R;
 
 public class SplashScreenActvity extends AppCompatActivity {
+    //region variable_decalarations
     int splashScreenDuration = 4000;
     ImageView imageView;
+    //endregion
+
+    //region activity_lifecycle
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +25,7 @@ public class SplashScreenActvity extends AppCompatActivity {
         propagateToMainActivity();
         pumpHeart();
     }
+    //endregion
 
     private void propagateToMainActivity() {
         new Handler().postDelayed(new Runnable() {
@@ -31,13 +36,13 @@ public class SplashScreenActvity extends AppCompatActivity {
                 finish();
             }
         },splashScreenDuration);
-
     }
+
+    //region logo_animation
     private void pumpHeart() {
         imageView.animate().scaleXBy(0.2f).scaleYBy(0.2f).setDuration(100).setListener(scaleUpListener);
 
     }
-
     private Animator.AnimatorListener scaleDownListener = new Animator.AnimatorListener() {
 
         @Override
@@ -90,4 +95,5 @@ public class SplashScreenActvity extends AppCompatActivity {
 
         }
     };
+    //endregion
 }

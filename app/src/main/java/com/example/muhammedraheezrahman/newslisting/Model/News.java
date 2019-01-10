@@ -6,7 +6,7 @@ public class News {
 
    private String status;
    private int totalResults;
-   private List<Articles> articles;
+   List<Articles> articles;
 
     public String getStatus() {
         return status;

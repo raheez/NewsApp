@@ -2,16 +2,36 @@ package com.example.muhammedraheezrahman.newslisting.Model;
 
 public class Articles {
 
+    //region vaiables
     private String author;
-
     private String title;
-
     private String description;
-
     private String urlToImage;
-
     private String content;
+    //endregion
 
+
+    //region database_variable_declarations
+    public static final String TABLE_NAME = "articles";
+
+    public static String COLUMN_ID = "id";
+    public static String COLUMN_AUTHOR = "author";
+    public static String COLUMN_TITLE = "title";
+    public static String COLUMN_DESCRIPTION = "description";
+    public static String COLUMN_IMAGE = "image";
+    public static String COLUMN_CONTENT = "content";
+
+    public static final String CREATE_TABLE = "CREATE TABLE "+ TABLE_NAME +
+            "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + COLUMN_AUTHOR + " TEXT,"
+            + COLUMN_TITLE + " TEXT,"
+            + COLUMN_DESCRIPTION + " TEXT,"
+            + COLUMN_IMAGE + " TEXT,"
+            + COLUMN_CONTENT + " TEXT" + ")";
+    //endregion
+
+
+    //region getters_setters
     public String getAuthor() {
         return author;
     }
@@ -51,4 +71,5 @@ public class Articles {
     public void setContent(String content) {
         this.content = content;
     }
+    //endregion
 }
