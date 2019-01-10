@@ -70,6 +70,7 @@ public class MainActivity extends RootActivity {
         super.onResume();
 
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -87,7 +88,6 @@ public class MainActivity extends RootActivity {
 
 
     //region article_manipulation
-
     private void fetchArticleFromWeb(){
         shimmerFrameLayout.startShimmer();
         shimmerFrameLayout.setVisibility(View.VISIBLE);
