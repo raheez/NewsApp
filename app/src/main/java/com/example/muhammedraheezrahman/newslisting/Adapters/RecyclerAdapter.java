@@ -2,6 +2,7 @@ package com.example.muhammedraheezrahman.newslisting.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -34,8 +35,13 @@ class ViewHolder extends RecyclerView.ViewHolder{
             public void onClick(View v) {
 
                 Articles articles = RecyclerAdapter.list.get(getAdapterPosition());
-
-                Toast.makeText(v.getContext(),"id is "+ articles.getId(),Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(v.getContext(),NewsDetailActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                int id = articles.getId();
+                Bundle bundle = new Bundle();
+                bundle.putInt("ID",id);
+                i.putExtras(bundle);
+                v.getContext().startActivity(i);
 
             }
         });

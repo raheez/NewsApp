@@ -89,6 +89,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         database.execSQL("DELETE FROM "+Articles.TABLE_NAME);
         database.close();
     }
+
+    public Articles getArticle(int id){
+        Articles article = new Articles();
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        Cursor cursor = database.query(Articles.TABLE_NAME,new String[]{Articles.COLUMN_ID,
+                Articles.COLUMN_TITLE,Articles.COLUMN_AUTHOR,Articles.COLUMN_CONTENT,
+                Articles.COLUMN_IMAGE,Articles.COLUMN_DESCRIPTION},Articles.COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)},null,null,null);
+        if (cursor!=null){
+            cursor.moveToFirst();
+            article.setId(cursor.getInt(cursor.getColumnIndex(Articles.COLUMN_ID)));
+            article.setAuthor(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_AUTHOR)));
+            article.setContent(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_CONTENT)));
+            article.setDescription(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_DESCRIPTION)));
+            article.setTitle(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_TITLE)));
+            article.setUrlToImage(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_IMAGE)));
+        }
+        cursor.close();
+        database.close();
+        return article;
+    }
     //endregion
 
 }

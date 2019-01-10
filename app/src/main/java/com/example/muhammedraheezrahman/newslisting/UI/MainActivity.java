@@ -74,15 +74,11 @@ public class MainActivity extends RootActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
-        databaseHelper.deleteAllArticles();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
-        databaseHelper.deleteAllArticles();
     }
     //endregion
 
@@ -94,6 +90,7 @@ public class MainActivity extends RootActivity {
         listContent.setVisibility(View.GONE);
         Call<News> callApi = apiService.getNewsList(country,apiKey);
         callApi.enqueue(new Callback<News>() {
+
             @Override
             public void onResponse(Call<News> call, Response<News> response) {
                 News news = new News();
@@ -102,21 +99,17 @@ public class MainActivity extends RootActivity {
                 list = news.getArticles();
                 insertArticlesToDb(list);
                 Log.d("Ran","call successfull"+list.size());
-
                 fetchArticlesFromDb();
-
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
                 Log.d("Ran","call Failed");
-
             }
         });
     }
 
     private  void insertArticlesToDb(List<Articles> list) {
-
         databaseHelper = new DatabaseHelper(getApplicationContext());
         databaseHelper.insertArticles(list);
     }
@@ -129,7 +122,6 @@ public class MainActivity extends RootActivity {
         shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
         listContent.setVisibility(View.VISIBLE);
-
     }
     //endregion
 
