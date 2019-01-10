@@ -8,6 +8,7 @@ public class Articles {
     private String description;
     private String urlToImage;
     private String content;
+    private int id;
     //endregion
 
 
@@ -32,6 +33,14 @@ public class Articles {
 
 
     //region getters_setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getAuthor() {
         return author;
     }

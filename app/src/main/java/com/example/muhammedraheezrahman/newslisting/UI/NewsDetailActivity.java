@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.muhammedraheezrahman.newslisting.R;
 
-public class NewsDetailActivity  extends AppCompatActivity {
+public class NewsDetailActivity  extends RootActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

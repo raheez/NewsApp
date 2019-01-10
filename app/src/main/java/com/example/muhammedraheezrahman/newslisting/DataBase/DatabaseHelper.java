@@ -68,6 +68,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()){
             do {
                 Articles articles = new Articles();
+
+                articles.setId(cursor.getInt(cursor.getColumnIndex(Articles.COLUMN_ID)));
                 articles.setAuthor(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_AUTHOR)));
                 articles.setContent(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_CONTENT)));
                 articles.setDescription(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_DESCRIPTION)));

@@ -10,9 +10,9 @@ import android.widget.ImageView;
 
 import com.example.muhammedraheezrahman.newslisting.R;
 
-public class SplashScreenActvity extends AppCompatActivity {
+public class SplashScreenActvity extends RootActivity {
     //region variable_decalarations
-    int splashScreenDuration = 4000;
+    int splashScreenDuration = 3500;
     ImageView imageView;
     //endregion
 
