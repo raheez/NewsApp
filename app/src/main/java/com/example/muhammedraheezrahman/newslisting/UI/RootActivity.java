@@ -7,8 +7,11 @@ import com.example.muhammedraheezrahman.newslisting.R;
 
 public class RootActivity extends AppCompatActivity {
 
+        //region variable_declaration
         int onStartCount = 0;
+        //endregion
 
+        //region activity_lifecycle
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -35,12 +38,14 @@ public class RootActivity extends AppCompatActivity {
                 onStartCount++;
             }
         }
+        //endregion
 
+        //region backkey_pressed_method
         @Override
         public void onBackPressed() {
             super.onBackPressed();
 
         }
-
+        //endregion
 
 }

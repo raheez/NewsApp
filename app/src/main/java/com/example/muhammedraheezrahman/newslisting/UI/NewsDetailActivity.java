@@ -16,11 +16,15 @@ import com.example.muhammedraheezrahman.newslisting.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewsDetailActivity  extends RootActivity {
+    //region variable_declaration
     private int id;
     private DatabaseHelper databaseHelper;
     private Articles article;
     private TextView titleTv,contentTv,authorTv;
     ImageView imageTv;
+    //endregion
+
+    //region activity_lifecycle
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +47,14 @@ public class NewsDetailActivity  extends RootActivity {
         Glide.with(getApplicationContext()).load(articles.getUrlToImage()).into(imageTv);
 
     }
+    //endregion
 
+    //region fetch_method
     private Articles fetchArticleFromDb(int id) {
 
         databaseHelper = new DatabaseHelper(getApplicationContext());
         article = databaseHelper.getArticle(id);
         return article;
     }
+    //endregion
 }

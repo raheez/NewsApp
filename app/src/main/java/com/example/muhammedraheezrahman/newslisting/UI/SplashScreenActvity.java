@@ -11,10 +11,12 @@ import android.widget.ImageView;
 import com.example.muhammedraheezrahman.newslisting.R;
 
 public class SplashScreenActvity extends RootActivity {
+
     //region variable_decalarations
     int splashScreenDuration = 3500;
     ImageView imageView;
     //endregion
+
 
     //region activity_lifecycle
     @Override
@@ -27,6 +29,8 @@ public class SplashScreenActvity extends RootActivity {
     }
     //endregion
 
+
+    //region move_to_main_activity_method
     private void propagateToMainActivity() {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -37,6 +41,8 @@ public class SplashScreenActvity extends RootActivity {
             }
         },splashScreenDuration);
     }
+    //endregion
+
 
     //region logo_animation
     private void pumpHeart() {

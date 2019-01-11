@@ -22,8 +22,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 class ViewHolder extends RecyclerView.ViewHolder{
 
+    //region variable_declaration
     TextView titleTV, descriptionTV;
     CircleImageView imageView;
+    //endregion
+
+    //region constructor_method
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
         titleTV = (TextView) itemView.findViewById(R.id.titleTv);
@@ -46,13 +50,17 @@ class ViewHolder extends RecyclerView.ViewHolder{
             }
         });
     }
-
+    //endregion
 
 }
 public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
+    //region variable_declaration
     private Context context;
     public static List<Articles> list;
+    //endregion
+
+    //region adapter_methods
 
     public RecyclerAdapter(Context context, List<Articles> list) {
         this.context = context;
@@ -85,20 +93,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
             }
             else if (imageUrl != null)
                 Glide.with(context).load(articles.getUrlToImage()).error(R.drawable.placeholdericon).into(viewHolder.imageView);
-
         }
-
     }
 
     @Override
     public int getItemCount() {
         return this.list.size();
     }
+    //endregion
 
+    //region adding_to_list_method
     public  void addToList(List<Articles> articleList){
        this.list.clear();
        this.list.addAll(articleList);
        notifyDataSetChanged();
     }
+    //endregion
 }
 

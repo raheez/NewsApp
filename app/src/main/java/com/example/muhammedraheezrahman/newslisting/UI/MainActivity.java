@@ -41,6 +41,7 @@ public class MainActivity extends RootActivity {
     private RelativeLayout listContent;
     //endregion
 
+
     //region activity_lifecyle
     @Override
     protected void onCreate(Bundle savedInstanceState) {
