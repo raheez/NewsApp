@@ -54,6 +54,7 @@ class ViewHolder extends RecyclerView.ViewHolder{
     //endregion
 
 }
+
 public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     //region variable_declaration
