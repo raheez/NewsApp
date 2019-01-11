@@ -27,6 +27,7 @@ class ViewHolder extends RecyclerView.ViewHolder{
     CircleImageView imageView;
     //endregion
 
+
     //region constructor_method
     public ViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -59,6 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     private Context context;
     public static List<Articles> list;
     //endregion
+
 
     //region adapter_methods
 
@@ -102,6 +104,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
     //endregion
 
+
     //region adding_to_list_method
     public  void addToList(List<Articles> articleList){
        this.list.clear();
@@ -109,5 +112,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
        notifyDataSetChanged();
     }
     //endregion
+
 }
 

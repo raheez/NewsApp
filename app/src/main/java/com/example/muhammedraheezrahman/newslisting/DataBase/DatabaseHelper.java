@@ -19,11 +19,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Articles articles;
     //endregion
 
+
     //region constuctor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     //endregion
+
 
     //region methods
     @Override
@@ -36,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Articles.TABLE_NAME);
     }
     //endregion
+
 
     //region CRUD_operation
     public  long insertArticles(List<Articles> list){

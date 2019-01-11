@@ -16,6 +16,7 @@ import com.example.muhammedraheezrahman.newslisting.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewsDetailActivity  extends RootActivity {
+
     //region variable_declaration
     private int id;
     private DatabaseHelper databaseHelper;
@@ -23,6 +24,7 @@ public class NewsDetailActivity  extends RootActivity {
     private TextView titleTv,contentTv,authorTv;
     ImageView imageTv;
     //endregion
+
 
     //region activity_lifecycle
     @Override
@@ -48,6 +50,7 @@ public class NewsDetailActivity  extends RootActivity {
 
     }
     //endregion
+
 
     //region fetch_method
     private Articles fetchArticleFromDb(int id) {

@@ -102,4 +102,5 @@ public class SplashScreenActvity extends RootActivity {
         }
     };
     //endregion
+
 }

@@ -39,6 +39,7 @@ public class MainActivity extends RootActivity {
     private FloatingActionButton updateButton;
     private ShimmerFrameLayout shimmerFrameLayout;
     private RelativeLayout listContent;
+    private static final String TAG = "MAIN_ACTIVITY";
     //endregion
 
 
@@ -99,13 +100,13 @@ public class MainActivity extends RootActivity {
                 List<Articles> list = new ArrayList<>();
                 list = news.getArticles();
                 insertArticlesToDb(list);
-                Log.d("Ran","call successfull"+list.size());
+                Log.d(TAG,"Call successfull"+list.size());
                 fetchArticlesFromDb();
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                Log.d("Ran","call Failed");
+                Log.d(TAG,"call Failed");
             }
         });
     }
@@ -118,7 +119,7 @@ public class MainActivity extends RootActivity {
     private void fetchArticlesFromDb(){
         databaseHelper = new DatabaseHelper(getApplicationContext());
         List<Articles> lists = databaseHelper.getAllArticles();
-        Log.d("Ran","Size id" + list.size());
+        Log.d(TAG,"Size id" + list.size());
         adapter.addToList(lists);
         shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);

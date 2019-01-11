@@ -11,6 +11,7 @@ public class RootActivity extends AppCompatActivity {
         int onStartCount = 0;
         //endregion
 
+
         //region activity_lifecycle
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class RootActivity extends AppCompatActivity {
             }
         }
         //endregion
+
 
         //region backkey_pressed_method
         @Override

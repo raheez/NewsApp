@@ -7,11 +7,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
+
+    //region variable_declaration
     private static final String URL = "https://newsapi.org/v2/";
-    private static final String API_KEY = "cb81f4bb3c284e799875cc1a23364334";
-
-
     static Retrofit retrofit = null;
+    //endregion
+
+
+    //region fetch_client_method
     public static Retrofit getClient(){
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -25,7 +28,7 @@ public class APIClient {
                 .client(client)
                 .build();
         return retrofit;
-
     }
+    //endregion
 
 }

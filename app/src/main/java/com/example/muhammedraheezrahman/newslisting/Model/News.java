@@ -10,6 +10,7 @@ public class News {
    List<Articles> articles;
    //endregion
 
+
     //region getters_setters
     public String getStatus() {
         return status;
@@ -35,4 +36,5 @@ public class News {
         this.articles = articles;
     }
     //endregion
+
 }
