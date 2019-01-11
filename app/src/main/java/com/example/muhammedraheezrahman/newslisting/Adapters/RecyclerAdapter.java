@@ -80,21 +80,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         String imageUrl,title,content;
         Articles articles = list.get(i);
-        title = articles.getTitle();
-        content = articles.getContent();
-        imageUrl = articles.getUrlToImage();
+        title = String.valueOf(articles.getTitle());
+        content = String.valueOf(articles.getContent());
+        imageUrl = String.valueOf(articles.getUrlToImage());
         if (articles!=null){
-            if (title!="null"){
-                viewHolder.titleTV.setText(String.valueOf(articles.getTitle()));
+            if (!title.equals("null")){
+                viewHolder.titleTV.setText(String.valueOf(title));
             }
-            if (content!="null"){
-                viewHolder.descriptionTV.setText(String.valueOf(articles.getContent()));
+            else if (title.equals("null")){
+                viewHolder.titleTV.setText("Title Not Available");
             }
-            if (imageUrl=="null"){
+            if (!content.equals("null")){
+                viewHolder.descriptionTV.setText(String.valueOf(content));
+            }
+            else if (content.equals("null")){
+                viewHolder.descriptionTV.setText("Content Not Available");
+            }
+            if (!imageUrl.equals("null")){
+                Glide.with(context).load(imageUrl).into(viewHolder.imageView);
+            }
+            else if (imageUrl.equals("null"))
                 Glide.with(context).load(R.drawable.placeholdericon).into(viewHolder.imageView);
-            }
-            else if (imageUrl != null)
-                Glide.with(context).load(articles.getUrlToImage()).error(R.drawable.placeholdericon).into(viewHolder.imageView);
         }
     }
 

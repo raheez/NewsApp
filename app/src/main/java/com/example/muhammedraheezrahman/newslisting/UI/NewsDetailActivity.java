@@ -43,10 +43,31 @@ public class NewsDetailActivity  extends RootActivity {
         content = String.valueOf(articles.getContent());
         author = String.valueOf("-- "+articles.getAuthor());
         imageURL = String.valueOf(articles.getUrlToImage());
-        titleTv.setText(title);
-        contentTv.setText(content);
-        authorTv.setText(author);
+        if (!title.equals("null")){
+            titleTv.setText(title);
+        }
+        else if (title.equals("null")){
+            titleTv.setText("Title Not Available");
+        }
+
+        if (!content.equals("null")){
+            contentTv.setText(content);
+        }
+        else if (content.equals("null")){
+            contentTv.setText("Content Not Available");
+        }
+        if (!author.equals("null")){
+            authorTv.setText(author);
+        }
+        else if (author.equals("null")){
+            authorTv.setText("Author Not Available");
+        }
+
+        if (!imageURL.equals("null"))
         Glide.with(getApplicationContext()).load(imageURL).into(imageTv);
+        else if (imageURL.equals("null")){
+            Glide.with(getApplicationContext()).load(R.drawable.placeholdericon).into(imageTv);
+        }
 
     }
     //endregion
