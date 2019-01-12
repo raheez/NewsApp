@@ -1,6 +1,9 @@
 package com.example.muhammedraheezrahman.newslisting.UI;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -41,6 +44,8 @@ public class MainActivity extends RootActivity {
     private ShimmerFrameLayout shimmerFrameLayout;
     private RelativeLayout listContent;
     private static final String TAG = "MAIN_ACTIVITY";
+    private boolean isConnected;
+    private RelativeLayout relativeLayout;
     //endregion
 
 
@@ -49,6 +54,7 @@ public class MainActivity extends RootActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout);
         shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_layout);
         listContent = (RelativeLayout) findViewById(R.id.conent_relativelayout);
         updateButton = (FloatingActionButton) findViewById(R.id.fab);
@@ -60,11 +66,29 @@ public class MainActivity extends RootActivity {
         adapter = new RecyclerAdapter(getApplicationContext(),list);
         recyclerView.setAdapter(adapter);
         apiService = APIClient.getClient().create(APIService.class);
-        fetchArticleFromWeb();
+        shimmerFrameLayout.startShimmer();
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        listContent.setVisibility(View.GONE);
+        isConnected = isNetworkConnected();
+        if (isConnected) {
+            fetchArticleFromWeb();
+        }
+        else {
+            final Snackbar snackbar = Snackbar.make(relativeLayout,"Connection not Available",Snackbar.LENGTH_LONG)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //dismiss
+                        }
+                    });
+            snackbar.show();
+        }
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fetchArticleFromWeb();
+                if (isConnected) {
+                    fetchArticleFromWeb();
+                }
             }
         });
     }
@@ -89,9 +113,6 @@ public class MainActivity extends RootActivity {
 
     //region article_manipulation
     private void fetchArticleFromWeb(){
-        shimmerFrameLayout.startShimmer();
-        shimmerFrameLayout.setVisibility(View.VISIBLE);
-        listContent.setVisibility(View.GONE);
         Call<News> callApi = apiService.getNewsList(country,apiKey);
         callApi.enqueue(new Callback<News>() {
 
@@ -129,4 +150,12 @@ public class MainActivity extends RootActivity {
     }
     //endregion
 
+
+    //region chech_network_status_method
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
+    //endregion
 }
