@@ -3,6 +3,7 @@ package com.example.muhammedraheezrahman.newslisting.UI;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,6 +56,7 @@ public class MainActivity extends RootActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         llm = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(llm);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new RecyclerAdapter(getApplicationContext(),list);
         recyclerView.setAdapter(adapter);
         apiService = APIClient.getClient().create(APIService.class);

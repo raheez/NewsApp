@@ -55,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(Articles.COLUMN_CONTENT, articles.getContent());
             contentValues.put(Articles.COLUMN_DESCRIPTION, articles.getDescription());
             contentValues.put(Articles.COLUMN_IMAGE, articles.getUrlToImage());
+            contentValues.put(Articles.COLUMN_DATE, articles.getPublishedAt());
 
             id = database.insert(Articles.TABLE_NAME,null,contentValues);
         }
@@ -78,10 +79,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 articles.setDescription(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_DESCRIPTION)));
                 articles.setTitle(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_TITLE)));
                 articles.setUrlToImage(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_IMAGE)));
+                articles.setPublishedAt(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_DATE)));
                 list.add(articles);
 
             }while (cursor.moveToNext());
-
         }
         database.close();
         return list;
@@ -99,7 +100,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = database.query(Articles.TABLE_NAME,new String[]{Articles.COLUMN_ID,
                 Articles.COLUMN_TITLE,Articles.COLUMN_AUTHOR,Articles.COLUMN_CONTENT,
-                Articles.COLUMN_IMAGE,Articles.COLUMN_DESCRIPTION},Articles.COLUMN_ID + "=?",
+                Articles.COLUMN_IMAGE,Articles.COLUMN_DESCRIPTION,
+                Articles.COLUMN_DATE},Articles.COLUMN_ID + "=?",
                 new String[]{String.valueOf(id)},null,null,null);
         if (cursor!=null){
             cursor.moveToFirst();
@@ -109,6 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             article.setDescription(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_DESCRIPTION)));
             article.setTitle(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_TITLE)));
             article.setUrlToImage(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_IMAGE)));
+            article.setPublishedAt(cursor.getString(cursor.getColumnIndex(Articles.COLUMN_DATE)));
         }
         cursor.close();
         database.close();

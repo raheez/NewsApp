@@ -10,15 +10,19 @@ import com.example.muhammedraheezrahman.newslisting.DataBase.DatabaseHelper;
 import com.example.muhammedraheezrahman.newslisting.Model.Articles;
 import com.example.muhammedraheezrahman.newslisting.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NewsDetailActivity  extends RootActivity {
 
     //region variable_declaration
     private int id;
     private DatabaseHelper databaseHelper;
     private Articles article;
-    private TextView titleTv,contentTv,authorTv;
+    private TextView titleTv,contentTv,authorTv,dateTv;
     private ImageView imageTv;
     private String title,content,author,imageURL;
+    private String publishedDate;
     //endregion
 
 
@@ -31,6 +35,7 @@ public class NewsDetailActivity  extends RootActivity {
         contentTv = (TextView) findViewById(R.id.contentTv);
         imageTv = (ImageView) findViewById(R.id.image);
         authorTv = (TextView) findViewById(R.id.authorTv);
+        dateTv = (TextView) findViewById(R.id.dateTv);
 
 
         Bundle p = getIntent().getExtras();
@@ -43,6 +48,8 @@ public class NewsDetailActivity  extends RootActivity {
         content = String.valueOf(articles.getContent());
         author = String.valueOf("-- "+articles.getAuthor());
         imageURL = String.valueOf(articles.getUrlToImage());
+        publishedDate = String.valueOf(articles.getPublishedAt());
+
         if (!title.equals("null")){
             titleTv.setText(title);
         }
@@ -68,6 +75,12 @@ public class NewsDetailActivity  extends RootActivity {
         else if (imageURL.equals("null")){
             Glide.with(getApplicationContext()).load(R.drawable.placeholdericon).into(imageTv);
         }
+        if (!publishedDate.equals("null")){
+            dateTv.setText(String.valueOf(formatDate(publishedDate)));
+        }
+        else if (publishedDate.equals("null")){
+            dateTv.setText(String.valueOf(""));
+        }
 
     }
     //endregion
@@ -79,6 +92,20 @@ public class NewsDetailActivity  extends RootActivity {
         databaseHelper = new DatabaseHelper(getApplicationContext());
         article = databaseHelper.getArticle(id);
         return article;
+    }
+    //endregion
+
+    //region date_formatting_method
+    public String formatDate(String dateString){
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = dateFormat.parse(dateString);
+            return dateFormat.format(date);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
     }
     //endregion
 }

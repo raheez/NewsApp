@@ -16,6 +16,8 @@ import com.example.muhammedraheezrahman.newslisting.Model.Articles;
 import com.example.muhammedraheezrahman.newslisting.R;
 import com.example.muhammedraheezrahman.newslisting.UI.NewsDetailActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -23,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 class ViewHolder extends RecyclerView.ViewHolder{
 
     //region variable_declaration
-    TextView titleTV, descriptionTV;
+    TextView titleTV, descriptionTV,dateTv;
     CircleImageView imageView;
     //endregion
 
@@ -34,6 +36,7 @@ class ViewHolder extends RecyclerView.ViewHolder{
         titleTV = (TextView) itemView.findViewById(R.id.titleTv);
         descriptionTV = (TextView) itemView.findViewById(R.id.messageTv);
         imageView = (CircleImageView) itemView.findViewById(R.id.statusImage);
+        dateTv = (TextView) itemView.findViewById(R.id.dateTv);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,11 +82,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        String imageUrl,title,content;
+        String imageUrl,title,content,publishedDate;
         Articles articles = list.get(i);
         title = String.valueOf(articles.getTitle());
         content = String.valueOf(articles.getContent());
         imageUrl = String.valueOf(articles.getUrlToImage());
+        publishedDate = String.valueOf(articles.getPublishedAt());
         if (articles!=null){
             if (!title.equals("null")){
                 viewHolder.titleTV.setText(String.valueOf(title));
@@ -102,6 +106,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
             }
             else if (imageUrl.equals("null"))
                 Glide.with(context).load(R.drawable.placeholdericon).into(viewHolder.imageView);
+
         }
     }
 
@@ -119,6 +124,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
        notifyDataSetChanged();
     }
     //endregion
+
+
 
 }
 

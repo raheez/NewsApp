@@ -9,6 +9,7 @@ public class Articles {
     private String urlToImage;
     private String content;
     private int id;
+    private String publishedAt;
     //endregion
 
 
@@ -21,6 +22,7 @@ public class Articles {
     public static String COLUMN_DESCRIPTION = "description";
     public static String COLUMN_IMAGE = "image";
     public static String COLUMN_CONTENT = "content";
+    public static String COLUMN_DATE = "publishedAt";
 
     public static final String CREATE_TABLE = "CREATE TABLE "+ TABLE_NAME +
             "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -28,7 +30,9 @@ public class Articles {
             + COLUMN_TITLE + " TEXT,"
             + COLUMN_DESCRIPTION + " TEXT,"
             + COLUMN_IMAGE + " TEXT,"
-            + COLUMN_CONTENT + " TEXT" + ")";
+            + COLUMN_CONTENT + " TEXT,"
+            + COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
+            + ")";
     //endregion
 
 
@@ -79,6 +83,14 @@ public class Articles {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getPublishedAt() {
+        return publishedAt;
+    }
+
+    public void setPublishedAt(String publishedAt) {
+        this.publishedAt = publishedAt;
     }
     //endregion
 
