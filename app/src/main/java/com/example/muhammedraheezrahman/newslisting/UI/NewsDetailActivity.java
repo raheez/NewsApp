@@ -2,6 +2,8 @@ package com.example.muhammedraheezrahman.newslisting.UI;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.example.muhammedraheezrahman.newslisting.DataBase.DatabaseHelper;
 import com.example.muhammedraheezrahman.newslisting.Model.Articles;
 import com.example.muhammedraheezrahman.newslisting.R;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +26,8 @@ public class NewsDetailActivity  extends RootActivity {
     private ImageView imageTv;
     private String title,content,author,imageURL;
     private String publishedDate;
+    private CardView cardView;
+    private ShimmerFrameLayout shimmerFrameLayout;
     //endregion
 
 
@@ -36,13 +41,39 @@ public class NewsDetailActivity  extends RootActivity {
         imageTv = (ImageView) findViewById(R.id.image);
         authorTv = (TextView) findViewById(R.id.authorTv);
         dateTv = (TextView) findViewById(R.id.dateTv);
-
+        cardView = (CardView) findViewById(R.id.cardview);
+        shimmerFrameLayout = (ShimmerFrameLayout) findViewById(R.id.shimmer_detail_layout);
+        shimmerFrameLayout.startShimmer();
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        cardView.setVisibility(View.INVISIBLE);
 
         Bundle p = getIntent().getExtras();
         if (p!=null){
             id =p.getInt("ID");
         }
-        Articles articles = fetchArticleFromDb(id);
+
+        if (id!=0){
+            Articles articles = fetchArticleFromDb(id);
+            displayArticle(articles);
+        }
+
+
+    }
+    //endregion
+
+
+    //region fetch_method
+    private Articles fetchArticleFromDb(int id) {
+
+        databaseHelper = new DatabaseHelper(getApplicationContext());
+        article = databaseHelper.getArticle(id);
+        return article;
+    }
+    //endregion
+
+    //region display_article_method
+    public void displayArticle(Articles article){
+        Articles articles = article;
 
         title = String.valueOf(articles.getTitle());
         content = String.valueOf(articles.getContent());
@@ -71,7 +102,7 @@ public class NewsDetailActivity  extends RootActivity {
         }
 
         if (!imageURL.equals("null"))
-        Glide.with(getApplicationContext()).load(imageURL).into(imageTv);
+            Glide.with(getApplicationContext()).load(imageURL).into(imageTv);
         else if (imageURL.equals("null")){
             Glide.with(getApplicationContext()).load(R.drawable.placeholdericon).into(imageTv);
         }
@@ -81,26 +112,20 @@ public class NewsDetailActivity  extends RootActivity {
         else if (publishedDate.equals("null")){
             dateTv.setText(String.valueOf(""));
         }
+        shimmerFrameLayout.stopShimmer();
+        shimmerFrameLayout.setVisibility(View.GONE);
+        cardView.setVisibility(View.VISIBLE);
 
     }
-    //endregion
-
-
-    //region fetch_method
-    private Articles fetchArticleFromDb(int id) {
-
-        databaseHelper = new DatabaseHelper(getApplicationContext());
-        article = databaseHelper.getArticle(id);
-        return article;
-    }
-    //endregion
 
     //region date_formatting_method
     public String formatDate(String dateString){
         try{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date date = dateFormat.parse(dateString);
-            return dateFormat.format(date);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("HH:mm:ss, dd MMM yyyy ");
+
+            return fmtOut.format(date);
 
         }catch (Exception e){
             e.printStackTrace();
