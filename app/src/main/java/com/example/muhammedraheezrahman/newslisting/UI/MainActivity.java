@@ -1,10 +1,10 @@
 package com.example.muhammedraheezrahman.newslisting.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.example.muhammedraheezrahman.newslisting.Adapters.RecyclerAdapter;
+import com.example.muhammedraheezrahman.newslisting.Adapter.RecyclerAdapter;
 import com.example.muhammedraheezrahman.newslisting.DataBase.DatabaseHelper;
 import com.example.muhammedraheezrahman.newslisting.Model.Articles;
 import com.example.muhammedraheezrahman.newslisting.Model.News;
@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends RootActivity {
+public class MainActivity extends RootActivity implements RecyclerAdapter.ClickListener {
 
     //region variable_declaration
     APIService apiService;
@@ -63,7 +63,7 @@ public class MainActivity extends RootActivity {
         llm = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(llm);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        adapter = new RecyclerAdapter(getApplicationContext(),list);
+        adapter = new RecyclerAdapter(getApplicationContext(),list,this);
         recyclerView.setAdapter(adapter);
         apiService = APIClient.getClient().create(APIService.class);
         shimmerFrameLayout.startShimmer();
@@ -123,13 +123,13 @@ public class MainActivity extends RootActivity {
                 List<Articles> list = new ArrayList<>();
                 list = news.getArticles();
                 insertArticlesToDb(list);
-                Log.d(TAG,"Call successfull"+list.size());
+                Log.d(TAG,"Fetch from web successfull"+list.size());
                 fetchArticlesFromDb();
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-                Log.d(TAG,"call Failed");
+                Log.d(TAG,"Fetch from web failed");
             }
         });
     }
@@ -156,6 +156,18 @@ public class MainActivity extends RootActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
+    }
+    //endregion
+
+
+    //region move_to_detail_screen_activity
+    @Override
+    public void propagateToNewsDetailActivity(int id) {
+        Intent i = new Intent(MainActivity.this,NewsDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("ID",id);
+        i.putExtras(bundle);
+        startActivity(i);
     }
     //endregion
 }

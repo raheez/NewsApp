@@ -1,4 +1,4 @@
-package com.example.muhammedraheezrahman.newslisting.Adapters;
+package com.example.muhammedraheezrahman.newslisting.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,15 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.muhammedraheezrahman.newslisting.Model.Articles;
 import com.example.muhammedraheezrahman.newslisting.R;
 import com.example.muhammedraheezrahman.newslisting.UI.NewsDetailActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,29 +24,26 @@ class ViewHolder extends RecyclerView.ViewHolder{
     //region variable_declaration
     TextView titleTV, descriptionTV,dateTv;
     CircleImageView imageView;
+    RecyclerAdapter.ClickListener clickListener;
     //endregion
 
 
     //region constructor_method
-    public ViewHolder(@NonNull View itemView) {
+    public ViewHolder(@NonNull View itemView, RecyclerAdapter.ClickListener listener) {
         super(itemView);
         titleTV = (TextView) itemView.findViewById(R.id.titleTv);
         descriptionTV = (TextView) itemView.findViewById(R.id.messageTv);
         imageView = (CircleImageView) itemView.findViewById(R.id.statusImage);
         dateTv = (TextView) itemView.findViewById(R.id.dateTv);
+        this.clickListener = listener;
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Articles articles = RecyclerAdapter.list.get(getAdapterPosition());
-                Intent i = new Intent(v.getContext(),NewsDetailActivity.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 int id = articles.getId();
-                Bundle bundle = new Bundle();
-                bundle.putInt("ID",id);
-                i.putExtras(bundle);
-                v.getContext().startActivity(i);
+                clickListener.propagateToNewsDetailActivity(id);
 
             }
         });
@@ -63,21 +57,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     //region variable_declaration
     private Context context;
     public static List<Articles> list;
+    private ClickListener clickListener;
     //endregion
 
 
     //region adapter_methods
 
-    public RecyclerAdapter(Context context, List<Articles> list) {
+    public RecyclerAdapter(Context context, List<Articles> list,ClickListener listener) {
         this.context = context;
         this.list = list;
+        this.clickListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.listitem,viewGroup,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,clickListener);
     }
 
     @Override
@@ -125,6 +121,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
     //endregion
 
+
+    //region interface_clicklistener
+    public interface ClickListener{
+        public void propagateToNewsDetailActivity(int id);
+    }
+    //endregion
 
 
 }
