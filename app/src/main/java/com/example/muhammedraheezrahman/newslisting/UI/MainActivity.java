@@ -33,8 +33,8 @@ public class MainActivity extends RootActivity implements RecyclerAdapter.ClickL
 
     //region variable_declaration
     APIService apiService;
-    private String country = "us";
-    private String apiKey = "cb81f4bb3c284e799875cc1a23364334";
+    private static final String country = "us";
+    private static final String apiKey = "cb81f4bb3c284e799875cc1a23364334";
     private static DatabaseHelper databaseHelper;
     private RecyclerView recyclerView;
     private LinearLayoutManager llm;
