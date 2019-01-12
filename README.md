@@ -1,6 +1,6 @@
 # NewsApp
 
-Shimmering Effect is used using library               "implementation 'com.facebook.shimmer:shimmer:0.3.0'" 
+Shimmering Effect is implemented using library               "implementation 'com.facebook.shimmer:shimmer:0.3.0'" 
 
 For displaying images smoothly Glide Library is used  "implementation 'com.github.bumptech.glide:glide:3.5.2'" 
 
