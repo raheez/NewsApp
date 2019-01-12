@@ -49,7 +49,7 @@ public class MainActivity extends RootActivity implements RecyclerAdapter.ClickL
     //endregion
 
 
-    //region activity_lifecyle
+    //region activity_lifecyle_methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,10 +108,10 @@ public class MainActivity extends RootActivity implements RecyclerAdapter.ClickL
     protected void onDestroy() {
         super.onDestroy();
     }
-    //endregion
+    //endregion_
 
 
-    //region article_manipulation
+    //region article_manipulation_methods
     private void fetchArticleFromWeb(){
         Call<News> callApi = apiService.getNewsList(country,apiKey);
         callApi.enqueue(new Callback<News>() {
@@ -160,7 +160,7 @@ public class MainActivity extends RootActivity implements RecyclerAdapter.ClickL
     //endregion
 
 
-    //region move_to_detail_screen_activity
+    //region move_to_detail_screen_activity_method
     @Override
     public void propagateToNewsDetailActivity(int id) {
         Intent i = new Intent(MainActivity.this,NewsDetailActivity.class);

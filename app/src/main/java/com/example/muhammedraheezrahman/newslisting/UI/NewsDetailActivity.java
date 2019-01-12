@@ -31,7 +31,7 @@ public class NewsDetailActivity  extends RootActivity {
     //endregion
 
 
-    //region activity_lifecycle
+    //region activity_lifecycle_methods
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
