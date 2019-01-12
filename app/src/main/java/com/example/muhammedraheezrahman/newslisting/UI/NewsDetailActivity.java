@@ -71,6 +71,7 @@ public class NewsDetailActivity  extends RootActivity {
     }
     //endregion
 
+
     //region display_article_method
     public void displayArticle(Articles article){
         Articles articles = article;
@@ -115,8 +116,9 @@ public class NewsDetailActivity  extends RootActivity {
         shimmerFrameLayout.stopShimmer();
         shimmerFrameLayout.setVisibility(View.GONE);
         cardView.setVisibility(View.VISIBLE);
-
     }
+    //endregion
+
 
     //region date_formatting_method
     public String formatDate(String dateString){
