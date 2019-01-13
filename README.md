@@ -14,6 +14,7 @@ Animations on Splash screen is done for the logo.
 Smooth animation on Entrence and leaving of Each Screen is also done.
 
 
+
 Functionality
 
 News Aricles are fetched from NEWS Api using Retrofit Library and is Stored in Database. Then the Article items are fetched from Database and displayed in CardViews using Recycler Views. After Clicking on CardViews the user is taken to the NewsDetail Screen.
