@@ -15,6 +15,7 @@ Smooth animation on Entrence and leaving of Each Screen is also done.
 
 
 Functionality
+
 News Aricles are fetched from NEWS Api using Retrofit Library and is Stored in Database. Then the Article items are fetched from Database and displayed in CardViews using Recycler Views. After Clicking on CardViews the user is taken to the NewsDetail Screen.
 
 <img src="https://github.com/raheez/NewsApp/blob/master/ScreenShots/SplashScreen.jpg" width="240" height="420">    <img src="https://github.com/raheez/NewsApp/blob/master/ScreenShots/ShimmeringEffect.jpg" width="240" height="420"><img src="https://github.com/raheez/NewsApp/blob/master/ScreenShots/ListScreen.jpg" width="240" height="420"> <img src="https://github.com/raheez/NewsApp/blob/master/ScreenShots/NewsDetais.jpg" width="240" height="420"> 
